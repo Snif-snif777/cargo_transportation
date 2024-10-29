@@ -1,0 +1,187 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+ <!-- bradcam_area  -->
+ <div class="bradcam_area bradcam_area2  bradcam_bg_2">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3>Ocean Freight</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<!-- service_details_area -->
+<div class="service_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="service_details_left">
+                    <h3>Services</h3>
+                    <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        {% for service in all_services %}
+                        <a class="{% if service.id == current_service.id %}active{% endif %}"
+                            href="{% url 'service_detail' service.id %}" role="tab">
+                            {{ service.title }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-8">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-{{ current_service.id }}" role="tabpanel">
+                        <div class="service_details_info">
+                            <h3>{{ current_service.title }}</h3>
+                            <p>{{ current_service.description }}</p>
+                        </div>
+                        <div class="service_thumb">
+                            <img class="img-fluid" src="{{ current_service.image.url }}" style="width: 800px; height: 400px;"
+                                alt="{{ current_service.title }}">
+                        </div>
+
+                        <!-- Accordion for FAQs -->
+                        <div class="accordion_area">
+                            <div class="faq_ask">
+                                <h3>Frequently Asked Questions</h3>
+                                <div id="accordion">
+                                    {% for faq in current_service.faqs.all %}
+                                    <div class="card">
+                                        <div class="card-header" id="heading{{ faq.id }}">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapse{{ faq.id }}" aria-expanded="false"
+                                                    aria-controls="collapse{{ faq.id }}">
+                                                    {{ faq.question }}
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse{{ faq.id }}" class="collapse"
+                                            aria-labelledby="heading{{ faq.id }}" data-parent="#accordion">
+                                            <div class="card-body">
+                                                {{ faq.answer }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Brochure Download Section -->
+                        <div class="download_brochure d-flex align-items-center justify-content-between">
+                            <div class="download_left d-flex align-items-center">
+                                <div class="icon">
+                                    <img src="{% static 'core/img/svg_icon/download.svg' %}" alt="">
+                                </div>
+                                <div class="download_text">
+                                    <h3>Download Our Brochure</h3>
+                                    <p>Get detailed information about our services.</p>
+                                </div>
+                            </div>
+                            <div class="download_right">
+                                <a class="boxed-btn3-line" href="{{ current_service.brochure_url }}">Download Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /service_details_area -->
+
+
+<!-- Estimate_area start  -->
+<div class="Estimate_area overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-5">
+                <div class="Estimate_info">
+                    <h3>Get free Estimate</h3>
+                    <p>Esteem spirit temper too say adieus who direct esteem. It look estee luckily or picture
+                        placing.</p>
+                    <a href="#" class="boxed-btn3">+10 672 457 356</a>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-7">
+                <div class="form">
+                    <form action="#">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="input_field">
+                                    <input type="text" placeholder="Your name">
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="input_field">
+                                    <input type="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="input_field">
+                                    <select class="wide">
+                                        <option data-display="Product type">Product type</option>
+                                        <option value="1">small</option>
+                                        <option value="2">standard</option>
+                                        <option value="3">high</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="input_field">
+                                    <select class="wide">
+                                        <option data-display="Product size">Product size</option>
+                                        <option value="1">M</option>
+                                        <option value="2">L</option>
+                                        <option value="3">Xl</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="input_field">
+                                    <select class="wide">
+                                        <option data-display="City of departure">City of departure</option>
+                                        <option value="1">departure</option>
+                                        <option value="2">departure</option>
+                                        <option value="3">departure</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="input_field">
+                                    <select class="wide">
+                                        <option data-display="Delivery city">City of departure</option>
+                                        <option value="1">Delivery</option>
+                                        <option value="2">Delivery</option>
+                                        <option value="3">Delivery</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="input_field">
+                                    <textarea placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="input_field">
+                                    <button class="boxed-btn3-line" type="submit">Send Estimate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Estimate_area end  -->
+
+{% endblock %}
